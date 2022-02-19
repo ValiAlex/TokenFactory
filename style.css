@@ -8,6 +8,8 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: #2c2c2c;
+  background-size: cover;
+  background-position: center;
 }
 body a {
   color: inherit;
