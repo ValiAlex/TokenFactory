@@ -857,11 +857,39 @@ header {
 
 
 
-        $("#TokenSubmit").click(function () {
+        $("#TokenSubmit").click(async function () {
           $("#loader1").show();
           //GenerateERC20FixToken();
           $("#SubmitResult").html("");
-          GenerateToken();
+          try {
+            await ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x1439' }],
+            });
+            GenerateToken();
+          } catch (switchError) {
+            // This error code indicates that the chain has not been added to MetaMask.
+            if (switchError.code === 4902) {
+              try {
+                await ethereum.request({
+                  method: 'wallet_addEthereumChain',
+                  params: [
+                    {
+                      chainId: '0x1439',
+                      chainName: 'TLX MAINNET',
+                      rpcUrls: ['https://mainnet-rpc.tlxscan.com/'] /* ... */,
+                    },
+                  ],
+                });
+              } catch (addError) {
+                alert("Can't add TLX MAINNET")
+                // handle "add" error
+              }
+            }
+            // handle other "switch" errors
+          }
+          // GenerateToken();
+
 
         });
 
