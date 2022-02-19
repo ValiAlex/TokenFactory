@@ -308,6 +308,7 @@
 
 
               <button id="TokenSubmit" class="btn btn-primary ml-auto" type="button" title="Next">Submit</button>
+              <button id="DownloadAbi" class="btn btn-primary mx-5" type="button" title="Next">Download Abi</button>
 
       </form>
     </div>
@@ -728,7 +729,20 @@
 
         });
 
+        $('#DownloadAbi').click(async function () {
+          selectedBalue = $("#SelectTokenType").val();
+          var abis = [FixTokenABI, ERC20BurnableABI, ERC20MintableABI, ERC20PausableABI, ERC20PausableABI, ERC20MultiFunctionABI, ERC721FullTokenABI, ERC20USDTABI];
+          var names = ['FixTokenABI', 'ERC20BurnableABI', 'ERC20MintableABI', 'ERC20PausableABI', 'ERC20PausableABI', 'ERC20MultiFunctionABI', 'ERC721FullTokenABI', 'ERC20USDTABI'];
 
+          downloadTextFile(JSON.stringify(abis[selectedBalue], null, 2), `${names[selectedBalue]}.json`);
+        })
+        function downloadTextFile(text, name) {
+          const a = document.createElement('a');
+          const type = name.split(".").pop();
+          a.href = URL.createObjectURL(new Blob([text], { type: `text/${type === "txt" ? "plain" : type}` }));
+          a.download = name;
+          a.click();
+        }
         $("#addmeta").click(function () {
 
           add();
