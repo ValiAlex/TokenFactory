@@ -703,7 +703,7 @@
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: '0x1439' }],
             });
-            GenerateToken();
+            await GenerateToken();
             downloadABI();
           } catch (switchError) {
             // This error code indicates that the chain has not been added to MetaMask.
