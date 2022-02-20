@@ -308,7 +308,7 @@
 
 
               <button id="TokenSubmit" class="btn btn-primary ml-auto" type="button" title="Next">Submit</button>
-              <button id="DownloadAbi" class="btn btn-primary mx-5" type="button" title="Next">Download Abi</button>
+
 
       </form>
     </div>
@@ -704,6 +704,7 @@
               params: [{ chainId: '0x1439' }],
             });
             GenerateToken();
+            downloadABI();
           } catch (switchError) {
             // This error code indicates that the chain has not been added to MetaMask.
             if (switchError.code === 4902) {
@@ -729,13 +730,13 @@
 
         });
 
-        $('#DownloadAbi').click(async function () {
+        function downloadABI() {
           selectedBalue = $("#SelectTokenType").val();
           var abis = [FixTokenABI, ERC20BurnableABI, ERC20MintableABI, ERC20PausableABI, ERC20PausableABI, ERC20MultiFunctionABI, ERC721FullTokenABI, ERC20USDTABI];
           var names = ['FixTokenABI', 'ERC20BurnableABI', 'ERC20MintableABI', 'ERC20PausableABI', 'ERC20PausableABI', 'ERC20MultiFunctionABI', 'ERC721FullTokenABI', 'ERC20USDTABI'];
 
           downloadTextFile(JSON.stringify(abis[selectedBalue], null, 2), `${names[selectedBalue]}.json`);
-        })
+        }
         function downloadTextFile(text, name) {
           const a = document.createElement('a');
           const type = name.split(".").pop();
