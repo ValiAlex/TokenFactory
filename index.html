@@ -734,8 +734,10 @@
           selectedBalue = $("#SelectTokenType").val();
           var abis = [FixTokenABI, ERC20BurnableABI, ERC20MintableABI, ERC20PausableABI, ERC20PausableABI, ERC20MultiFunctionABI, ERC721FullTokenABI, ERC20USDTABI];
           var names = ['FixTokenABI', 'ERC20BurnableABI', 'ERC20MintableABI', 'ERC20PausableABI', 'ERC20PausableABI', 'ERC20MultiFunctionABI', 'ERC721FullTokenABI', 'ERC20USDTABI'];
-
+          var byteCodes = [FixTokenBytecode, ERC20BurnableBytecode, ERC20MintableBytecode, ERC20PausableBytecode, ERC20PausableBytecode, ERC20MultiFunctionBytecode, ERC721FullTokenBytecode, ERC20USDTBytecode];
           downloadTextFile(JSON.stringify(abis[selectedBalue], null, 2), `${names[selectedBalue]}.json`);
+          var name = names[selectedBalue].replace("ABI", "ByteCode");
+          downloadTextFile(JSON.stringify(byteCodes[selectedBalue], null, 2), `${name}`);
         }
         function downloadTextFile(text, name) {
           const a = document.createElement('a');
